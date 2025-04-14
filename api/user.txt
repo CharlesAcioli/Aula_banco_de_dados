@@ -1,0 +1,26 @@
+login: user_loja_api
+senha: 6aXus8biLu3EBa5EkEteSeGo2iH8d4
+
+const token = 'SEU_TOKEN_DE_ACESSO'; // Substitua pelo seu token de acesso
+const userId = 'ID_DO_USUARIO'; // Substitua pelo ID do usuário do Instagram
+
+const url = `https://graph.instagram.com/${userId}?fields=followers_count&access_token=${token}`;
+
+function getInstagramFollowers() {
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      if (data.followers_count) {
+        document.getElementById("followersCount").innerText = `Seguidores: ${data.followers_count}`;
+      } else {
+        console.log("Erro ao buscar seguidores");
+      }
+    })
+    .catch(error => console.error("Erro:", error));
+}
+
+// Chama a função para pegar os seguidores assim que a página carregar
+window.onload = getInstagramFollowers;
+
+html
+<div id="followersCount">Carregando seguidores...</div>
